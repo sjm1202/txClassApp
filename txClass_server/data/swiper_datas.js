@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000"
+const { baseUrl } = require('../config')
 module.exports = [
   { "id": "01", "img": `${baseUrl}/img/swiper01.jpeg` },
   { "id": "02", "img": `${baseUrl}/img/swiper02.jpeg` },

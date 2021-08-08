@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000"
+const { baseUrl } = require('../config')
 module.exports = {
   "result": {
     "swipers": [
