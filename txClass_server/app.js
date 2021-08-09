@@ -33,6 +33,37 @@ app.get('/course/v1/get_home_datas', (req, res) => {
   }
   res.json(data);
 })
+app.get('/course/v1/get_course_types', (req, res) => {
+  const data = {
+    data: {
+      course_types
+    },
+    success: true,
+    message: ''
+  }
+  res.json(data);
+})
+app.get('/course/v1/get_courses', (req, res) => {
+  let offset = req.query.offset;
+  let limit = req.query.limit;
+  let type = req.query.course_type;
+  let courses = course_datas.filter(item => item.type === type);
+  let returnData = courses
+  if(offset && limit){
+    offset = parseInt(offset);
+    limit = parseInt(limit);
+    returnData = courses.slice(offset, offset + limit);
+  }
+  const data = {
+    data: {
+      courses: returnData,
+      total: courses.length
+    },
+    success: true,
+    message: ''
+  }
+  res.json(data)
+})
 
 app.listen(3000, () => {
     console.log('server is start');

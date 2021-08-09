@@ -1,10 +1,10 @@
 import { API } from '../utils/config';
 import HTTP from '../utils/http';
-export default class ListModel extends HTTP{
-    getCourseFields(){
+class ListModel extends HTTP{
+    getCourseTypes(){
         return new Promise((resolve, reject) => {
             this.fetchGet({
-                url: API.getCourseFields,
+                url: API.getCourseTypes,
                 success: (res) => {
                     resolve(res)
                 },
@@ -14,10 +14,10 @@ export default class ListModel extends HTTP{
             })
         })
     }
-    getCourses(field: string){
+    getCourses(courseType: string, offset: number, limit: number){
         return new Promise((resolve, reject) => {
             this.fetchGet({
-                url: API.getCourseFields + field,
+                url: `${API.getCourses}?course_type=${courseType}&offset=${offset}&limit=${limit}` ,
                 success: (res) => {
                     resolve(res)
                 },
@@ -28,3 +28,4 @@ export default class ListModel extends HTTP{
         })
     }
 }
+export default new ListModel();

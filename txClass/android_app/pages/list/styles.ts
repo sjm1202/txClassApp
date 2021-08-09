@@ -1,13 +1,18 @@
 import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
-  jumpToListWrap: {
+  container: {
+    flex: 1
+  },
+  courseScroll: {
+    paddingTop: 10
+  },
+  noMore: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 15
+    paddingBottom: 15 
   },
-  jumpToList: {
-    color: '#999',
-    marginRight: 5
+  noMoreText: {
+    color: '#999'
   }
 })

@@ -1,14 +1,15 @@
 import React from "react";
 import {
     View,
-    Text
+    TextInput
 } from 'react-native';
+import styles from "./styles";
 interface PageProps {
+
 }
 const Search: React.FC<PageProps> = (props) => {
     return (
-        <View>
-            <Text>Search</Text>
+        <View style={styles.searchPage}>
         </View>
     )
 }

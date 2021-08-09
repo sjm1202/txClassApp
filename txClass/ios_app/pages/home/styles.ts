@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
-  jumpSearchWrap: {
+  jumpToListWrap: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 15
   },
-  jumpSearch: {
+  jumpToList: {
     color: '#999',
     marginRight: 5
   }

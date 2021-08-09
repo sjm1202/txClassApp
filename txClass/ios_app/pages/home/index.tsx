@@ -13,6 +13,7 @@ import HomeSwiper from '../../components/HomeSwiper';
 import MainTitle from '../../components/MainTitle';
 import CourseList from "../../components/courseList";
 import styles from './styles'
+import { directToPage } from "../../utils/extension";
 
 interface PageProps {
     navigation: any;
@@ -24,9 +25,12 @@ const Home: React.FC<PageProps> = (props) => {
   const [ courseTypes, setCourseTypes ] = useState<any[]>([]);
   const [ allTypeCount, setAllTypeCoun ] = useState<number>(0);
   const [ courseDatas, setCourseDatas ] = useState<any[]>([]);
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = React.useState(true);
 
   const onRefresh = React.useCallback(() => {
+    if(loadFlag.current){
+      return
+    }
     setRefreshing(true);
     loadFlag.current = true
     homeModel.getHomeData(0, 2).then((res: any) => {
@@ -44,7 +48,7 @@ const Home: React.FC<PageProps> = (props) => {
   const getHomeData = async (offset: number, limit: number) => {
     loadFlag.current = true
     let res: any = await homeModel.getHomeData(offset, limit);
-    console.log(offset, limit, res)
+    setRefreshing(false);
     if(res.success){
       const data = res.data;
       setCourseTypes([...courseTypes, ...data.courseTypes]);
@@ -55,8 +59,8 @@ const Home: React.FC<PageProps> = (props) => {
     loadFlag.current = false
   }
 
-  const handleJumpToSearch = () => {
-    props.navigation.navigate('查找课程')
+  const handleJumpToList = () => {
+    directToPage( navigation, '课程列表', {})
   }
 
   const handleMomentumScrollEnd = (e: any) => {
@@ -90,7 +94,7 @@ const Home: React.FC<PageProps> = (props) => {
         courseTypes.map((item, index) => {
           return (
             <View key={index}>
-              <MainTitle title={item.name}></MainTitle>
+              <MainTitle id={item.id} title={item.name} navigation={navigation} ></MainTitle>
               <CourseList courseData={courseDatas.filter(data => data.type === item.id)} navigation={navigation}/>
             </View>
           )
@@ -99,9 +103,9 @@ const Home: React.FC<PageProps> = (props) => {
       
       {
         allTypeCount <= courseTypes.length ? (
-          <TouchableWithoutFeedback  onPress={handleJumpToSearch}>
-            <View style={styles.jumpSearchWrap}>
-              <Text style={styles.jumpSearch}>查看所有课程</Text><CustomIcon name='faxian' size={14} color='#999'/>
+          <TouchableWithoutFeedback  onPress={handleJumpToList}>
+            <View style={styles.jumpToListWrap}>
+              <Text style={styles.jumpToList}>查看更多课程</Text><CustomIcon name='zhangdan' size={14} color='#999'/>
             </View>
             
           </TouchableWithoutFeedback>

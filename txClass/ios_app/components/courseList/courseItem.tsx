@@ -21,7 +21,7 @@ const Index: React.FC<IProps> = (props) => {
         </View>
         <View style={styles.description}>
           <View style={styles.courseTitle}>
-            <Text style={styles.title}>{data.title}</Text>
+            <Text numberOfLines={2} style={styles.title}>{data.title}</Text>
           </View>
           <View style={styles.courseDetail}>
             <Text style={styles.courseSection}>

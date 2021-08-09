@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CustomIcon from '../commons/customIcon';
 import Home from './pages/home';
+import List from './pages/list';
 import Search from './pages/search';
 import Detail from './pages/detail';
 import Logo from './components/Logo';
@@ -17,8 +18,8 @@ const BottomTab: React.FC<{}> = (props) => {
           let iconName;
           if(route.name === '主页'){
             iconName='shouye';
-          }else if(route.name === '查找课程'){
-            iconName='faxian';
+          }else if(route.name === '课程列表'){
+            iconName='zhangdan';
           }
           return <CustomIcon name={iconName} size={size} color={color} />;
         },
@@ -27,7 +28,7 @@ const BottomTab: React.FC<{}> = (props) => {
       })}
     >
       <Tab.Screen name="主页" component={Home} options={{headerShown: false}} />
-      <Tab.Screen name="查找课程" component={Search} options={{headerShown: false}}/>
+      <Tab.Screen name="课程列表" component={List} options={{headerShown: false}}/>
     </Tab.Navigator>
   )
 
